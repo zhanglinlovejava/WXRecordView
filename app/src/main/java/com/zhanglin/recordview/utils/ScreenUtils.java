@@ -1,4 +1,4 @@
-package com.zhanglin.recordview;
+package com.zhanglin.recordview.utils;
 
 import android.app.Activity;
 import android.content.Context;

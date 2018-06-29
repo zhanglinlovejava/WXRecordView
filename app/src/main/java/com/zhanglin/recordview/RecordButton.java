@@ -17,10 +17,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
+import com.zhanglin.recordview.utils.ScreenUtils;
+
 /**
  * Created by zhanglin on 2018/6/27.
  */
-public class RoundView extends View {
+public class RecordButton extends View {
 
     private static final int EXIT_CIRCLE_DEFAULT_RADIUS = 50;//dp
     private static final int INNER_CIRCLE_DEFAULT_RADIUS = 40;//dp
@@ -40,23 +42,23 @@ public class RoundView extends View {
     private float mExitCircleRadius, mExitInitCircleRadius, mInnerCircleRadius, mInnerInitCircleRadius, mProgressWidth;
     private int mExitCircleColor, mInnerCircleColor, mProgressColor;
 
-    public RoundView(Context context) {
+    public RecordButton(Context context) {
         this(context, null);
     }
 
-    public RoundView(Context context, @Nullable AttributeSet attrs) {
+    public RecordButton(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RoundView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public RecordButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundView);
-        mExitCircleRadius = mExitInitCircleRadius = a.getDimensionPixelSize(R.styleable.RoundView_exitCircleRadius, dpToPx(EXIT_CIRCLE_DEFAULT_RADIUS));
-        mInnerCircleRadius = mInnerInitCircleRadius = a.getDimensionPixelSize(R.styleable.RoundView_innerCircleRadius, dpToPx(INNER_CIRCLE_DEFAULT_RADIUS));
-        mExitCircleColor = a.getColor(R.styleable.RoundView_exitCircleColor, EXIT_CIRCLE_DEFAULT_COLOR);
-        mInnerCircleColor = a.getColor(R.styleable.RoundView_innerCircleColor, INNER_CIRCLE_DEFAULT_COLOR);
-        mProgressColor = a.getColor(R.styleable.RoundView_progressColor, PROGRESS_DEFAULT_COLOR);
-        mProgressWidth = a.getDimensionPixelSize(R.styleable.RoundView_progressWidth, dpToPx(PROGRESS_DEFAULT_WIDTH));
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RecordButton);
+        mExitCircleRadius = mExitInitCircleRadius = a.getDimensionPixelSize(R.styleable.RecordButton_exitCircleRadius, dpToPx(EXIT_CIRCLE_DEFAULT_RADIUS));
+        mInnerCircleRadius = mInnerInitCircleRadius = a.getDimensionPixelSize(R.styleable.RecordButton_innerCircleRadius, dpToPx(INNER_CIRCLE_DEFAULT_RADIUS));
+        mExitCircleColor = a.getColor(R.styleable.RecordButton_exitCircleColor, EXIT_CIRCLE_DEFAULT_COLOR);
+        mInnerCircleColor = a.getColor(R.styleable.RecordButton_innerCircleColor, INNER_CIRCLE_DEFAULT_COLOR);
+        mProgressColor = a.getColor(R.styleable.RecordButton_progressColor, PROGRESS_DEFAULT_COLOR);
+        mProgressWidth = a.getDimensionPixelSize(R.styleable.RecordButton_progressWidth, dpToPx(PROGRESS_DEFAULT_WIDTH));
         a.recycle();
         init();
     }
@@ -156,8 +158,8 @@ public class RoundView extends View {
                 startExitAnim(false);
                 startInnerAnim(true);
                 invalidate();
-                if (iRoundViewAction != null) {
-                    iRoundViewAction.onRecordFinish();
+                if (iRecordViewAction != null) {
+                    iRecordViewAction.onRecordFinish();
                 }
             }
 
@@ -211,9 +213,11 @@ public class RoundView extends View {
                 if (endTime - startTime < LONG_PRESS_TIME) {
                     if (handler.hasMessages(LONG_PRESS_TIME)) {
                         handler.removeMessages(LONG_PRESS_TIME);
+                        startExitAnim(false);
+                        startInnerAnim(true);
                     }
-                    if (iRoundViewAction != null) {
-                        iRoundViewAction.onSingleClick();
+                    if (iRecordViewAction != null) {
+                        iRecordViewAction.onSingleClick();
                     }
                 } else {
                     mProgressAnim.cancel();
@@ -240,20 +244,20 @@ public class RoundView extends View {
                             mProgressAnim.start();
                         }
                     }, CIRCLE_SCALE_TIME);
-                    if (iRoundViewAction != null) {
-                        iRoundViewAction.onRecordStart();
+                    if (iRecordViewAction != null) {
+                        iRecordViewAction.onRecordStart();
                     }
                     break;
             }
         }
     };
-    private IRoundViewAction iRoundViewAction;
+    private IRecordViewAction iRecordViewAction;
 
-    public void setiRoundViewAction(IRoundViewAction iRoundViewAction) {
-        this.iRoundViewAction = iRoundViewAction;
+    public void setiRecordViewAction(IRecordViewAction iRecordViewAction) {
+        this.iRecordViewAction = iRecordViewAction;
     }
 
-    public interface IRoundViewAction {
+    public interface IRecordViewAction {
         void onSingleClick();
 
         void onRecordStart();

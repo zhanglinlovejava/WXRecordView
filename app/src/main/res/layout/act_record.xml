@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/black">
+
+        <FrameLayout
+            android:id="@+id/videoRoot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/iv_switch"
+            android:layout_width="35dip"
+            android:layout_height="35dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="15dp"
+            android:padding="2dp"
+            android:src="@drawable/em_camera_switch_selector" />
+
+
+        <ImageView
+            android:id="@+id/iv_cancel"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/white_circle_bg"
+            android:padding="25dp"
+            android:src="@mipmap/re_record" />
+
+        <ImageView
+            android:id="@+id/iv_confirm"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/white_circle_bg"
+            android:padding="25dp"
+            android:src="@mipmap/confirm" />
+
+        <com.zhanglin.recordview.RecordButton
+            android:id="@+id/recordButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="20dp"
+            app:exitCircleRadius="40dp"
+            app:innerCircleRadius="30dp" />
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="75dp"
+            android:layout_marginLeft="50dp"
+            android:src="@mipmap/cancel" />
+    </RelativeLayout>
+
+</LinearLayout>

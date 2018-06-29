@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">RecordView</string>
+    <string name="app_name">WXRecordView</string>
+    <string name="record_init_fail">录制功能初始化失败</string>
+    <string name="record_time_too_short">录制时间太短</string>
+    <string name="camera_permission_refuse">无法获取摄像头数据，请在手机应用权限管理中打开%1$s的摄像头权限</string>
+    <string name="audio_permission_refuse">无法获取音频数据，请在手机应用权限管理中打开%1$s的通话及本地录音的权限</string>
 </resources>
